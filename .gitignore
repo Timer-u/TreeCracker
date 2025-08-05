@@ -1,19 +1,20 @@
-# gradle
-
+# Gradle
 .gradle/
 build/
 out/
+output/
 
-# idea
-
+# IntelliJ IDEA
 .idea/
 *.iml
 *.ipr
 *.iws
 
-#other
-
-/output/
-/build/
-/.idea/
+# Build outputs
 /Test/
+/build/
+/output/
+
+# System files
+*.log
+*.DS_Store
