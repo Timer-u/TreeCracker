@@ -1,9 +1,18 @@
+// 添加 shadow 插件和 application 插件
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'application'
 }
 
 group 'me.cortex.TreeCracker'
 version '1.0-SNAPSHOT'
+
+// 指定主类
+application {
+    mainClass = 'me.cortex.TreeCracker.program.OpenCLProgram'
+}
+
 
 repositories {
     mavenCentral()
@@ -19,4 +28,19 @@ dependencies {
     implementation group: 'commons-io', name: 'commons-io', version: '2.8.0'
     implementation "com.github.hube12:SEED:b80304e54"
     implementation "com.seedfinding:latticg:1.06@jar"
+
+    // 关键的 OpenCL 依赖
+    implementation group: 'org.jocl', name: 'jocl', version: '2.0.4'
+}
+
+// 配置 shadowJar 任务
+shadowJar {
+    archiveBaseName.set('TreeCracker-OpenCL')
+    archiveClassifier.set('')
+    archiveVersion.set('1.0')
+    // 合并 Manifest，确保主类设置正确
+    mergeServiceFiles()
+    manifest {
+        attributes 'Main-Class': application.mainClass
+    }
 }
